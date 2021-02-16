@@ -20,6 +20,15 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/dashboard';
 
     /**
+     * The path to the "home" route for your application.
+     *
+     * This is used by Laravel admin authentication to redirect admin after login.
+     *
+     * @var string
+     */
+    public const ADMIN_HOME = '/admin/dashboard';
+
+    /**
      * The controller namespace for the application.
      *
      * When present, controller route declarations will automatically be prefixed with this namespace.
@@ -46,6 +55,11 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
+
+            Route::prefix('admin')
+                ->middleware(['web'])
+                ->namespace($this->namespace)
+                ->group(base_path('routes/admin.php'));
         });
     }
 
