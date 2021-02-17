@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,9 @@ use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 | contains the "admin" middleware group. Now create something great!
 |
 */
+Route::get('/refresh-csrf', function () {
+    return csrf_token();
+})->name('admin.csrf');
 
 Route::group(['middleware' => 'guest:admin'], function () {
     
@@ -41,5 +46,14 @@ Route::group(['middleware' => 'auth:admin'], function () {
     
     Route::view('/dashboard', 'admin.dashboard')->name('admin.dashboard');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('admin.logout');
+
+    Route::resource('category', CategoryController::class)->except(['show']);
+    Route::post('/category/status', [CategoryController::class, 'updateStatus'])->name('category.status.update');
+
+   	Route::resource('product', ProductController::class);
+   	Route::post('/product/status', [ProductController::class, 'updateStatus'])->name('product.status.update');
+
+    Route::post('/categories', [CategoryController::class, 'getCategories'])->name('admin.dt.categories');
+    Route::post('/products', [ProductController::class, 'getProducts'])->name('admin.dt.products');
 
 });
