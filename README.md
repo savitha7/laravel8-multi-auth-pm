@@ -52,7 +52,7 @@ http://127.0.0.1:8000/admin/login
 
 http://127.0.0.1:8000/admin/register
 
-**you can change it from database as per your need.
+**you can change it from .env as per your need.
 
 
 ## Environment variables
