@@ -1,5 +1,3 @@
-# [Product Management]
-
 Laravel 8 Multiple Guards Authentication with Product management 
 
 Laravel 8 Multiple Guards Authentication with admin side Product management & user side with active product list
@@ -40,7 +38,7 @@ Start the local development server
 
 You can now access the server at http://127.0.0.1:8000
     
-**Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
+**Make sure you set the correct database connection information before running the migrations**
 
     php artisan migrate 
     php artisan db:seeder
